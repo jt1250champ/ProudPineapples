@@ -8,27 +8,27 @@ app.secret_key = "teehee"
 
 @app.route('/1/')
 def err1():
-    return render_template("~jessica.tao/ProudPineaples/templates/1.html")
+    return render_template("1.html")
 
 @app.route('/2/')
 def err2():
-    return render_template("~jessica.tao/ProudPineaples/templates/2.html")
+    return render_template("2.html")
 
 @app.route('/3/')
 def err3():
-    return render_template("~jessica.tao/ProudPineaples/templates/3.html")
+    return render_template("3.html")
 
 @app.route('/4/')
 def err4():
-    return render_template("~jessica.tao/ProudPineaples/templates/4.html")
+    return render_template("4.html")
 
 @app.route('/')
 def page0():
-    return render_template("~jessica.tao/ProudPineaples/templates/index.html")
+    return render_template("index.html")
 
 @app.route('/signuppg/')
 def page1():
-    return render_template("~jessica.tao/ProudPineaples/templates/signup.html")
+    return render_template("signup.html")
 
 @app.route('/signup/', methods = ["POST"])
 def writeit():
@@ -70,7 +70,7 @@ def writeit():
 
 @app.route('/loginpg/')
 def page2():
-    return render_template("~jessica.tao/ProudPineaples/templates/login.html")
+    return render_template("login.html")
 
 @app.route('/login/', methods=['POST'])
 def login():
@@ -95,11 +95,11 @@ def login():
 
 @app.route('/about/')
 def page3():
-    return render_template("~jessica.tao/ProudPineaples/templates/about.html")
+    return render_template("about.html")
 
 @app.route('/play/')
 def page4():
-    return render_template("~jessica.tao/ProudPineaples/templates/play.html")
+    return render_template("play.html")
 
 if __name__ == '__main__':
     app.debug = True
