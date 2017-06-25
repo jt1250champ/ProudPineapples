@@ -3,11 +3,46 @@ import sqlite3
 
 import hashlib
 
-import cgi
-import cgitb
-cgitb.enable()
-
 from operator import itemgetter
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def page0:
+    return render_template("index.html")
+
+@app.route('/signup/')
+def page1:
+    return render_template("signup.html")
+
+@app.route('/loginpg/')
+def page2:
+    return render_template("login.html")
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = User.get(request.form['uuid'])
+
+        if user and hash_password(request.form['password']) == user._password:
+            login_user(user, remember=True)
+            return redirect('/home/')
+        else:
+            return abort(401)  # 401 Unauthorized
+    else:
+        return abort(405)  # 405 Method Not Allowed
+
+@app.route('/about/')
+def page3:
+    return render_template("about.html")
+
+@app.route('/play/')
+def page4:
+    return render_template("play.html")
+
+
+
 
 header='Content-type: text/html\n\n'
 
