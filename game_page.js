@@ -1,11 +1,11 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * VARIABLES:												 *
  * Various variables for data/arrays, player 1 and 2 could	 *
  * be made into objects? Possible future update				 *
  * 															 *
  * Leave values empty for variables unless given a value, 	 *
  * all values are chosen intentionally.						 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 //player 1 and 2 scores for each category
 var player1numRight1 = 0;
@@ -53,10 +53,10 @@ var currentPlayer = Math.floor(Math.random() + 1);
 //creates variable running current player and current question
 var playerCategory;
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * IMPORTS:													 *
  * For buttons and images, based off of IDs. See HTML page	 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  
 //button imports
 var a = document.getElementById("A");
@@ -71,50 +71,59 @@ var edu = document.getElementById("edu");
 var health = document.getElementById("health");
 //console.log("Button A value: " + a);
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * ARRAYS:													 *
  * Holds various questions for each data type, and			 *
  * corresponding answers. Also has various wrong answers.	 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  
 //wrong answer arrays, for each type
-var words = ["angry", "awake", "run", "sad", "food", "oak", "java", "python", "magic"];
+var words = ["police","vegetarians","delta","beta","life","sunlight","nature","art","spirit","ceramics","cathode-ray tubes","crystal","heat waves","aliens","asteroids","radiation","science","math","history","biology","chemistry","honey","strawberries","baking soda","doctors","lawyers","police officers"];
 var numbers;
-var names = ["Louis Armstrong", "Nelson Mandela", "George Washington", "Barack Obama", "Theodore Roosevelt", "Taylor Swift", "Peter", "Luna", "Harold", "Tiffany"];
+var places = ["Grayfield Manor","The White House","New York City","San Francisco","Tel Aviv","Nevada","Peru","India","Russia","Iran","Massachussets","Delaware","Alabama","Texas"];
+var names = ["Pablo Picasso","Claude Monet","Andy Warhol","Barack Obama","Bill Clinton","Hillary Clinton","Sylvia Rivera","Marsha Johnson","Theodore Roosevelt","Woodrow Wilson","Lyndon B. Johnson","John Muir","Edward Abbey","Aldo Leopold","Mark Zuckerberg","Elon Musk","Dorotea Bucca","Vera Gedroitz","Merit Ptah"];
 
 //category 1 questions and correct answers
-var qset1word = ["What does the word 'joy' mean?", "What does the word 'apprehensive' mean?"];
-var aset1word = ["happy", "scared"];
-var qset1num = ["What is 9+10?"];
-var aset1num = ["19"];
-var qset1name = ["What is the name of the founder of Microsoft?", "What is the name of the first man to walk on the moon?", "What is the name of the founder of SpaceX?"];
-var aset1name = ["Bill Gates", "Neil Armstrong", "Elon Musk"];
+var qset1word = ["In the 1960s gay bars were often owned and operated by \n the...?","What was a common symbol of gay rights before the \n rainbow flag?","The color orange on the rainbow flag represents...?","The color blue on the rainbow flag represents...?"];
+var aset1word = ["mafia","lambda","healing","harmony"];
+var qset1num = ["How many colors were on the original rainbow flag?","How many colors are on the rainbow flag widely used \n today?"];
+var aset1num = [8,6];
+var qset1name = ["Who invented the rainbow flag?","Who organized the first Pride parade?"];
+var aset1name = ["Gilbert Baker","Brenda Howard"];
+var qset1pl = ["What location is often cited as the beginning of the \n modern Gay Rights Movement?","The largest pride parade was held in...?"];
+var aset1pl = ["Stonewall Inn","São Paulo"];
 
 //category 2 questions and correct answers
-var qset2word = ["What does the word 'sleepy' mean?"];
-var aset2word = ["tired"];
-var qset2num = ["What is 7+8?", "What is 5x6?"];
-var aset2num = ["15", "30"];
-var qset2name = ["What is the name of the mentor who helped us come up with ideas?", "What is the name of the person in charge of the Rails workshop?"];
-var aset2name = ["Jinny", "Michael"]
+var qset2word = ["Which of the following are recyclable?","The ozone layer protects against...?"];
+var aset2word = ["glass bottles","uv light"];
+var qset2num = ["Ocean-based vehicles dump this many billion pounds of \n garbage into the ocean.","People in highly polluted areas have this percent of a higher \n chance of dying of lung cancer.","What percent of lakes in America are too polluted for \n aquatic life?","Recycling and compost saved this many trillion \n tons of waste."];
+var aset2num = ["14","20","40","85"];
+var qset2name = ["Who created the United States Environmental Protection \n Agency?","Who was the author of the book 'Silent Spring'?"];
+var aset2name = ["Richard Nixon","Rachel Carson"]
+var qset2pl = ["The world's tallest tree is a redwood found in...?","The country that produces the most pollution is...?"];
+var aset2pl = ["California","China"];
 
 //category 3 questions and correct answers
-var qset3word = ["What does the word 'intelligent' mean?"];
-var aset3word = ["smart"];
-var qset3num = ["What is the percentage of people that major in tech?", "What is the percentage of people that major in history?"];
-var aset3num = ["40", "40"];
-var qset3name = ["Who is the founder of Apple?"];
-var aset3name = ["Steve Jobs"];
+var qset3word = ["One of the fastest growing degrees is...?","20% of all undergraduates take one of these \n courses...?"];
+var aset3word = ["recreation","remedial"];
+var qset3num = ["The percent of unemployed people who graduated from a community \n college is about...?","About what percent of children from America’s wealthiest \n families attend an elite college?","In the past 8 years, government funding for higher education \n was cut by what percent in the U.S.?","What percent of students attend a public college or \n university?"];
+var aset3num = ["2","40","18","73"];
+var qset3name = ["Who established the U.S. Department of Education?","Who attempted to dismantle the U.S. Department of Education?"];
+var aset3name = ["Jimmy Carter","Ronald Reagan"];
+var qset3pl = ["This place's Institute of Technology is ranked as most popular \n among people who rose in social status.","This state has the highest graduation rate in the U.S."];
+var aset3pl = ["New Jersey","Iowa"];
 
 //category 4 questions and correct answers
-var qset4word = ["What does the word 'strut' mean?", "What does the word 'hop' mean?"];
-var aset4word = ["walk", "jump"];
-var qset4num = ["What is 9+28?"];
-var aset4num = ["37"]
-var qset4name = ["Who was the third president of the U.S.?", "Who was the 4th president of the U.S.?"];
-var aset4name = ["Thomas Jefferson", "James Madison"]
+var qset4word = ["This can treat athlete's foot.","1 in 5 whats have clinically significant psychopathic traits?"];
+var aset4word = ["garlic","ceos"];
+var qset4num = ["Over what percent of cancer could be prevented by a healthy lifestyle?","What percent of people needing mental health services don't get it?","How many more teaspoons of sugar do Americans consume than recommended daily?"];
+var aset4num = ["30","60","13"];
+var qset4name = ["Who spends more money on global health than the World Health Organization?","Who was the first female doctor?"];
+var aset4name = ["Bill Gates","Elizabeth Blackwell"];
+var qset4pl = ["The first dead heart transplant was performed where?","Where are measles officially eliminated?"];
+var aset4pl = ["Australia","Americas"];
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * FUNCTIONS:											     *
  * Define functions, in the order they are used in the main	 *
  * game(); function. Order is:								 *
@@ -131,7 +140,7 @@ var aset4name = ["Thomas Jefferson", "James Madison"]
  * - showQuestion();										 *
  * - answered();											 *
  * - result();												 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 //stores all the player scores in an easy-to-pull function
 function chooseData(player,category){
@@ -224,7 +233,7 @@ function generate_questions() {
 	
 	//choose a random question and answer type
     questionType = Math.floor((Math.random() * 3.49) + 1);
-    answerType = Math.floor((Math.random() * 2.49) + 1);
+    answerType = Math.floor((Math.random() * 3.49) + 1);
     
     //for each question type and answer type, pull one of the above arrays and set to questions[] and correctAnswers[]
     switch (questionType) {
@@ -241,6 +250,10 @@ function generate_questions() {
                 case 3:
                     questions = qset1name;
                     correctAnswers = aset1name;
+                    break;
+                case 4:
+                    questions = qset1pl;
+                    correctAnswers = aset1pl;
                     break;
                 default:
                 	//if answer type cannot be found, send error message
@@ -261,6 +274,10 @@ function generate_questions() {
                     questions = qset2name;
                     correctAnswers = aset2name;
                     break;
+                case 4:
+                    questions = qset2pl;
+                    correctAnswers = aset2pl;
+                    break;
                 default:
                 	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
@@ -280,6 +297,10 @@ function generate_questions() {
                     questions = qset3name;
                     correctAnswers = aset3name;
                     break;
+                case 4:
+                    questions = qset3pl;
+                    correctAnswers = aset3pl;
+                    break;
                 default:
                 	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
@@ -298,6 +319,10 @@ function generate_questions() {
                 case 3:
                     questions = qset4name;
                     correctAnswers = aset4name;
+                    break;
+                case 4:
+                    questions = qset4pl;
+                    correctAnswers = aset4pl;
                     break;
                 default:
                 	//if answer type cannot be found, send error message
@@ -336,6 +361,9 @@ function generate_questions() {
                 answers.push(names[Math.floor(Math.random() * names.length)].toString());
                 //console.log("Answers array:" + answers.toString());
                 break;
+            case 4:
+            	answers.push(places[Math.floor(Math.random() * places.length)].toString());
+            	break;
             default:
             	//if answer type cannot be found, send error message
                 window.alert("Error: Answer type could not be chosen");
@@ -605,10 +633,10 @@ function result(right_or_wrong) {
     }
 }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * MAIN FUNCTION:											 *
  * Runs all the functions that do not run on each other.	 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+\* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  
 //main game() function
 function game() {
