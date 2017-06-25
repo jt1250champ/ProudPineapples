@@ -1,44 +1,56 @@
 #! /usr/bin/python
-print 'content-type: text/html\n'
 import sqlite3
 
 import hashlib
 
-import cgi
-import cgitb
-cgitb.enable()
-
 from operator import itemgetter
 
-header='Content-type: text/html\n\n'
+from flask import Flask, render_template
+app = Flask(__name__)
 
-bad_login='<p style="color:red;" align="center">ERROR: Passwords do not match.</p>'
-bad_login2='<p style="color:red;" align="center">ERROR: Username taken.</p>'
-bad_login3='<p style="color:red;" align="center">ERROR: Incorrect password.</p>'
-bad_login4='<p style="color:red;" align="center">ERROR: Username not found.</p>'
-image='https://cdn2.iconfinder.com/data/icons/flat-avatars-1/512/Percy-512.png'
+@app.route('/1/')
+def err1():
+    return render_template("1.html")
 
-def enter():
-    form=cgi.FieldStorage()
+@app.route('/2/')
+def err2():
+    return render_template("2.html")
 
-    if "submit_signup" in form:
-        firstname=form.getvalue('firstname')
-        lastname=form.getvalue('lastname')
-        username=form.getvalue('username')
-        password=form.getvalue('password')
-        password2=form.getvalue('confirmpwd')
+@app.route('/3/')
+def err3():
+    return render_template("3.html")
+
+@app.route('/4/')
+def err4():
+    return render_template("4.html")
+
+@app.route('/')
+def page0():
+    return render_template("index.html")
+
+@app.route('/signuppg/')
+def page1():
+    return render_template("signup.html")
+
+@app.route('/signup/')
+def write():
+    if request.method == 'POST':
+        user = request.form['uuid']
+        firstname=request.form['firstname']
+        lastname=request.form['lastname']
+        username=request.form['username']
+        password=request.form['password']
+        password2=request.form['confirmpwd']
         if password != password2:
-            print header
-            return updateFile('signup.html','<!--bad_login-->',bad_login)
+            return redirect('/1/')
         else:
             db = sqlite3.connect("data/master.db", check_same_thread = False)
             c = db.cursor()
             
-            c.execute('SELECT Username FROM master WHERE Username = ? , (username,))
+            c.execute('SELECT Username FROM master WHERE Username = ?' , (username,))
         
             if len(c.fetchall()) > 0:
-                print header
-                return updateFile('signup.html','<!--bad_login-->',bad_login2)
+                return redirect('/2/')
                
             wr=open('data/'+username+'.db','w')
             wr.write('')
@@ -49,56 +61,44 @@ def enter():
             
             c.execute("INSERT INTO master VALUES (?,?,?)", (username,firstname+" "+lastname,hex_dig))
             db.commit()
-                      
-            db = sqlite3.connect("data/"+username+".db", check_same_thread = False)
-            c = db.cursor()
-            c.execute('CREATE TABLE person (Friends TEXT, Game BOOLEAN, Turn BOOLEAN, Stickers INT, Streak INT);')
-            
-            #profile=readFile('profile.html')
-            #profile=profile.replace('!NAME',firstname.upper())
-            #profile=profile.replace('!username',username)
-            
-            print header
-            print readFile("play.html")
-            return
+            return redirect('login')
 
-    if "submit_login" in form:
-        username=form.getvalue('username')
-        password=form.getvalue('password')
+@app.route('/loginpg/')
+def page2():
+    return render_template("login.html")
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = request.form['uuid']
+        db = sqlite3.connect("data/master.db", check_same_thread = False)
+        c = db.cursor()
+        user = request.form['uuid']
+        username=request.form['username']
+        password=request.form['password']
         passw = password.encode('utf-8')
         hash_pass = hashlib.sha256(passw)
         hex_dig = hash_pass.hexdigest()
-        
-        db = sqlite3.connect("data/master.db", check_same_thread = False)
-        c = db.cursor()
-            
+             
         c.execute('SELECT Username FROM master WHERE Username = ?', (username,))
 
         if len(c.fetchall()) > 0:
             c.execute('SELECT Username FROM master WHERE Username = ? AND Password = ?', (username, hex_dig,))
             if len(c.fetchall()) > 0:
-                print header
-                print readFile('play.html')
-                return 
+                return redirect('/play/')
             else:
-                print header
-                return updateFile('login.html','<!--bad_login-->',bad_login3)
+                return redirect('/3/')
         else:
-            print header
-            return updateFile('login.html','<!--bad_login-->',bad_login4)
+            return redirect('/4/')
 
-def readFile(filename):
-    try:
-        f=open(filename,'rU')
-        s=f.read()
-        f.close()
-    except:
-        s=''
-    return s
+@app.route('/about/')
+def page3():
+    return render_template("about.html")
 
-def updateFile(filename,old,new):
-    file_string=readFile(filename)
-    file_string=file_string.replace(old,new)
-    print file_string
+@app.route('/play/')
+def page4():
+    return render_template("play.html")
 
-enter()
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
