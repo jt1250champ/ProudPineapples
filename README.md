@@ -13,7 +13,7 @@ Our game utilizes a Javascript interface, powered by Python and Flask. User data
 
 Member | GitHub | Role
 -------|--------|-----
-JT Tao | @ jt1250champ | Front-end
-Annabelle Lew | @ FeatherWillow | Front-end
-Shannon Lau | @ slau8 | Middleware/Back-end
-Tiffany Moi | @ tmoi29 | Middleware/Back-end
+JT Tao | @jt1250champ | Front-end
+Annabelle Lew | @FeatherWillow | Front-end
+Shannon Lau | @slau8 | Middleware/Back-end
+Tiffany Moi | @tmoi29 | Middleware/Back-end
