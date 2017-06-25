@@ -1,4 +1,5 @@
 #! /usr/bin/python
+print 'content-type: text/html\n'
 import sqlite3
 
 import hashlib
