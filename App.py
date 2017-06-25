@@ -6,21 +6,21 @@ from operator import itemgetter
 app = Flask(__name__)
 app.secret_key = "teehee"
 
-#@app.route('/1/')
-#def err1():
-#    return render_template("1.html")
-#
-#@app.route('/2/')
-#def err2():
-#    return render_template("2.html")
-#
-#@app.route('/3/')
-#def err3():
-#    return render_template("3.html")
-#
-#@app.route('/4/')
-#def err4():
-#    return render_template("4.html")
+@app.route('/1/')
+def err1():
+    return render_template("1.html")
+
+@app.route('/2/')
+def err2():
+    return render_template("2.html")
+
+@app.route('/3/')
+def err3():
+    return render_template("3.html")
+
+@app.route('/4/')
+def err4():
+    return render_template("4.html")
 
 @app.route('/')
 def page0():
