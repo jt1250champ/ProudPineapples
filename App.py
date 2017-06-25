@@ -1,28 +1,26 @@
-#! /usr/bin/python
-import sqlite3
-
-import hashlib
-
+from flask import Flask, render_template, request, session
+import sqlite3, hashlib
 from operator import itemgetter
 
-from flask import Flask, render_template
+
 app = Flask(__name__)
+app.secret_key = "teehee"
 
-@app.route('/1/')
-def err1():
-    return render_template("1.html")
-
-@app.route('/2/')
-def err2():
-    return render_template("2.html")
-
-@app.route('/3/')
-def err3():
-    return render_template("3.html")
-
-@app.route('/4/')
-def err4():
-    return render_template("4.html")
+#@app.route('/1/')
+#def err1():
+#    return render_template("1.html")
+#
+#@app.route('/2/')
+#def err2():
+#    return render_template("2.html")
+#
+#@app.route('/3/')
+#def err3():
+#    return render_template("3.html")
+#
+#@app.route('/4/')
+#def err4():
+#    return render_template("4.html")
 
 @app.route('/')
 def page0():
@@ -33,7 +31,7 @@ def page1():
     return render_template("signup.html")
 
 @app.route('/signup/')
-def write():
+def writeit():
     if request.method == 'POST':
         user = request.form['uuid']
         firstname=request.form['firstname']
@@ -88,8 +86,8 @@ def login():
                 return redirect('/play/')
             else:
                 return redirect('/3/')
-        else:
-            return redirect('/4/')
+    else:
+        return redirect('/4/')
 
 @app.route('/about/')
 def page3():
