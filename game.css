@@ -25,4 +25,5 @@ button:active {
 	padding: 5px;
 	width:auto;
 	height: auto;
+	border: 5px solid #000000;
 }
