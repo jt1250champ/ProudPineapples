@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 import sqlite3, hashlib
 from operator import itemgetter
 
@@ -30,10 +30,9 @@ def page0():
 def page1():
     return render_template("signup.html")
 
-@app.route('/signup/')
+@app.route('/signup/', methods = ["POST"])
 def writeit():
-    if request.method == 'POST':
-        user = request.form['uuid']
+
         firstname=request.form['firstname']
         lastname=request.form['lastname']
         username=request.form['username']
@@ -59,19 +58,24 @@ def writeit():
             
             c.execute("INSERT INTO master VALUES (?,?,?)", (username,firstname+" "+lastname,hex_dig))
             db.commit()
-            return redirect('login')
+            
+            db = sqlite3.connect("data/"+username+".db", check_same_thread = False)
+            c = db.cursor()
+            
+            c.execute("CREATE TABLE person (Friends TEXT, Game BOOLEAN, Turn BOOLEAN, Stickers INT, Streak INT)")
+            db.commit()
+
+            return redirect('/loginpg/')
+        
 
 @app.route('/loginpg/')
 def page2():
     return render_template("login.html")
 
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login/', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        user = request.form['uuid']
         db = sqlite3.connect("data/master.db", check_same_thread = False)
         c = db.cursor()
-        user = request.form['uuid']
         username=request.form['username']
         password=request.form['password']
         passw = password.encode('utf-8')
@@ -86,8 +90,8 @@ def login():
                 return redirect('/play/')
             else:
                 return redirect('/3/')
-    else:
-        return redirect('/4/')
+        else:
+            return redirect('/4/')
 
 @app.route('/about/')
 def page3():

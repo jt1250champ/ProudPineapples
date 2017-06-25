@@ -21,29 +21,27 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about/">About</a></li>
-                <li class="current"><a href="/signuppg/">Sign Up</a></li>`
-                <li><a href="/loginpg/">Login</a></li>
+                <li><a href="/signuppg/">Sign Up</a></li>
+                <li class = "current"><a href="#">Login</a></li>
             </ul>
         </nav>
         <hr class="catchadream" style="height:5px;border:none;width:100%"/>
     </header>
 
     <div class="hero">
-        <h1>Sign Up</h1>
+        <h1>Log in</h1>
+        <p style="color:#ff424f;" align="center">ERROR: Incorrect password.</p>
         <div class="login col-md-12">
-            <form method="POST" action="/signup/">
-                First Name:<input style = "margin-left: 1.1em; color: black" type ="textbox" name ="firstname"><br /> <br />
-                Last Name: <input style = "margin-left: 1.1em; color: black" type ="textbox" name ="lastname"><br /> <br />
-                Username: <input style = "margin-left: 1.2em; color: black" type="textbox" name="username"><br /><br />
-                Password: <input style = "margin-left: 1.3em; color: black" type="password" name = "password"> <br /> <br />
-                Confirm Password: <input style = "margin-left: 0.8em; color: black" type = "password" name = "confirmpwd"> <br /> <br />
-                <a style="margin-left: 0; font-size: 1.3em; color: aliceblue" href="login.html">Already have an account?</a>   
-                <input style="color: black; font-size: 1.3em" type="submit" name="submit_signup" value="Signup">
+            <form method="POST" action="/loginpg/">
+                Username: <input style = "margin-left: 1.2em" type="textbox" name="username"><br /><br />
+                Password: <input style = "margin-left: 1.3em" type="textbox" name = "password"> <br /> <br />
+                <a style="margin-left: 0; font-size: 1.3em; color: aliceblue" href="signup.html">Didn't sign up yet?</a>
+                <input style="color: black; font-size: 1.3em" type="submit" name="Login" value="Login">
             </form>
         </div>
     </div>
-      
-      <footer>
+
+       <footer>
           <p>Contact us at <a href="mailto:admin@proudpineapples.tech">admin@proudpineapples.tech</a></p>
       </footer>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
