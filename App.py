@@ -47,7 +47,7 @@ def write():
             db = sqlite3.connect("data/master.db", check_same_thread = False)
             c = db.cursor()
             
-            c.execute('SELECT Username FROM master WHERE Username = ? , (username,))
+            c.execute('SELECT Username FROM master WHERE Username = ?' , (username,))
         
             if len(c.fetchall()) > 0:
                 return redirect('/2/')
