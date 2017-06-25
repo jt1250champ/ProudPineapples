@@ -1,0 +1,23 @@
+/* modifies appearance of button */
+button {
+	background-color:#0052cc;
+	border: 10px solid #002699;
+	border-radius: 8px;
+	font-family:"lato",sans-serif;
+	padding: 10px;
+	margin: 10px;
+	font-size: 30px;
+	color:#ddf;
+	border-style:outset;
+}
+button:active {
+	border-style:inset;
+}
+
+/* modifies appearance of background of game*/
+#body {
+	margin: 0px;
+    width: auto;
+    height: auto;
+    background-color:#f0f8ff;
+}

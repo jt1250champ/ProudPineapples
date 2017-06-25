@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!--<style type="text/css" src="../style/main.css">
+		</style>-->
+		<link rel="stylesheet" type="text/css" href="game.css" />
 	</head>
 	<body id ="body">
-		<canvas id="game" width="1050px" height="500px" style="border:1px solid #000000;">
+		<!--Displays the questions, score, etc-->
+		<canvas id="game" width="1050px" height="500px" style="margin:10px;">
 		</canvas>
 		<br />
+		<!--Displays the answer choices-->
 		<button id="A" type="button" onclick="answered(x);"></button>
 		<button id="B" type="button" onclick="answered(y);"></button>
 		<button id="C" type="button" onclick="answered(z);"></button>
 		<button id="D" type="button" onclick="answered(randomAnswer);"></button>
 		<br />
+		<!--Displays the images secretly-->
 		<img id="pride" src="img/pride_sticker.jpg" height="1" width="1" />
 		<img id="env" src="img/Globe-Connected-icon.png" height="1" width="1" />
 		<img id="edu" src="img/education.png" height="1" width="1" />
 		<img id="health" src="img/first-aid-kit-icon-256x256.png" height="1" width="1" />
+		<!--Runs javascript code-->
 		<script type="text/javascript" src="game_page.js">
 		</script>
 	</body>

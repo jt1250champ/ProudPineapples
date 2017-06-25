@@ -1,251 +1,88 @@
-var numRight1 = 0;
-var numRight2 = 0;
-var numRight3 = 0;
-var numRight4 = 0;
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * VARIABLES:												 *
+ * Various variables for data/arrays, player 1 and 2 could	 *
+ * be made into objects? Possible future update				 *
+ * 															 *
+ * Leave values empty for variables unless given a value, 	 *
+ * all values are chosen intentionally.						 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+//player 1 and 2 scores for each category
+var player1numRight1 = 0;
+var player1numRight2 = 0;
+var player1numRight3 = 0;
+var player1numRight4 = 0;
+
+var player2numRight1 = 0;
+var player2numRight2 = 0;
+var player2numRight3 = 0;
+var player2numRight4 = 0;
+
+//question category and answer method
 var questionType;
+var questionTypeName;
 var answerType;
+
+//arrays for the questions and answers
 var questions;
 var correctAnswers;
 var answers = [];
+
+//values for picking random questions/answers
 var num;
 var randomAnswer;
-var numbers;
+
+//run while loop for picking random answers
 var i = 0;
+
+//data values for random answers
 var x;
 var y;
 var z;
+
+//question correct? boolean
 var correcto;
+
+//for creating canvases
 var canvas;
 var ctx;
 
+//choose who is first player randomly
+var currentPlayer = Math.floor(Math.random() + 1);
+
+//creates variable running current player and current question
+var playerCategory;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * IMPORTS:													 *
+ * For buttons and images, based off of IDs. See HTML page	 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
+//button imports
 var a = document.getElementById("A");
 var b = document.getElementById("B");
 var c = document.getElementById("C");
 var d = document.getElementById("D");
+
+//sticker image imports
 var pride = document.getElementById("pride");
 var env = document.getElementById("env");
 var edu = document.getElementById("edu");
 var health = document.getElementById("health");
-console.log("Button A value: " + a);
+//console.log("Button A value: " + a);
 
-function drawCanvas() {
-    canvas = document.getElementById("game");
-    console.log("Canvas value: " + canvas);
-    ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "#000000";
-    ctx.fillText("The category is: " + questionType, 10, 50);
-	setTimeout(showQuestion, 1000);
-}
-
-function zeroHistory() {
-	ctx.fillStyle = "#cccccc";
-	ctx.fillRect(375,125,150,25);
-	ctx.fillRect(530,125,150,25);
-	ctx.fillRect(685,125,150,25);
-}
-function oneHistory() {
-	ctx.fillStyle = "#e65c00";
-	ctx.fillRect(375,125,150,25);
-	ctx.fillStyle = "#cccccc";
-	ctx.fillRect(530,125,150,25);
-	ctx.fillRect(685,125,150,25);
-}
-function twoHistory() {
-	ctx.fillStyle = "#e65c00";
-	ctx.fillRect(375,125,150,25);
-	ctx.fillRect(530,125,150,25);
-	ctx.fillStyle = "#cccccc";
-	ctx.fillRect(685,125,150,25);
-}
-function sticker() {
-	ctx.fillStyle = "#e65c00";
-	ctx.fillRect(375,125,150,25);
-	ctx.fillRect(530,125,150,25);
-	ctx.fillRect(685,125,150,25);
-	switch(questionType) {
-		case 1:
-			ctx.drawImage(pride, 10, 200);
-			break;
-		case 2:
-			ctx.drawImage(env, 10, 200);
-			break;
-		case 3:
-			ctx.drawImage(edu, 10, 200);
-			break;
-		case 4:
-			ctx.drawImage(health, 10, 200);
-			break;
-		default:
-			window.alert("Question type could not be found");
-	}
-}
-
-function progress(prog) {
-	switch (prog) {
-		case 0:
-			zeroHistory();
-			break;
-		case 1:
-			oneHistory();
-			break;
-		case 2:
-			twoHistory();
-			break;
-		case 3:
-			sticker();
-			break;
-		default:
-			window.alert("Progress not saved");
-	}
-}
-
-function showQuestion() {
-	ctx.fillText("Question: " + questions[num], 10, 100);
-	switch (questionType) {
-		case 1:
-			ctx.fillText("Progress for this category: ",10,150);
-			progress(numRight1);
-			break;
-		case 2:
-			ctx.fillText("Progress for this category: ",10,150);
-			progress(numRight2);
-			break;
-		case 3:
-			ctx.fillText("Progress for this category: ",10,150);
-			progress(numRight3);
-			break;
-		case 4:
-			ctx.fillText("Progress for this category: ",10,150);
-			progress(numRight4);
-			break;
-		default:
-			window.alert("Question type not found");
-	}
-    changeButtons();
-}
-
-function changeButtons() {
-	x = 0;
-	y = 0;
-	z = 0;
-	randomAnswer = 0;
-	randomAnswer = Math.floor(Math.random() * 3.49);
-    a.innerHTML = answers[randomAnswer];
-    x = randomAnswer;
-    while (x == randomAnswer) {
-        randomAnswer = Math.floor(Math.random() * 3.49);
-    }
-    b.innerHTML = answers[randomAnswer];
-    y = randomAnswer;
-    while (x == randomAnswer || y == randomAnswer) {
-        randomAnswer = Math.floor(Math.random() * 3.49);
-    }
-    c.innerHTML = answers[randomAnswer];
-    z = randomAnswer;
-    while (x == randomAnswer || y == randomAnswer || z == randomAnswer) {
-        randomAnswer = Math.floor(Math.random() * 3.49);
-    }
-    d.innerHTML = answers[randomAnswer];
-	console.log("x = " + x);
-	console.log("y = " + y);
-	console.log("z = " + z);
-	console.log("randomAnswer = " + randomAnswer);
-}
-
-function result(right_or_wrong) {
-    if (right_or_wrong == true) {
-        switch (questionType) {
-            case 1:
-                if(numRight1 == 3) {
-                	numRight1 == 3;
-                } else {
-                	numRight1++;
-                	progress(numRight1);
-                }
-                console.log("Added to 1");
-                break;
-            case 2:
-                if(numRight2 == 3) {
-                	numRight2 == 3;
-                } else {
-                	numRight2++;
-                	progress(numRight2);
-                }
-                console.log("Added to 2");
-                break;
-            case 3:
-                if(numRight3 == 3) {
-                	numRight3 == 3;
-                } else {
-                	numRight3++;
-                	progress(numRight3);
-                }
-                console.log("Added to 3");
-                break;
-            case 4:
-                if(numRight4 == 3) {
-                	numRight4 == 3;
-                } else {
-                	numRight4++;
-                	progress(numRight4);
-                }
-                console.log("Added to 4");
-                break;
-            default:
-                window.alert("Question type could not be chosen");
-        }
-    } else if (right_or_wrong == false) {
-        switch (questionType) {
-            case 1:
-                if(numRight1 == 3) {
-                	numRight1 == 3;
-                } else {
-                	numRight1--;
-                	progress(numRight1);
-                }
-                console.log("Took from 1");
-                break;
-            case 2:
-				if(numRight2 == 3) {
-                	numRight2 == 3;
-                } else {
-                	numRight2--;
-                	progress(numRight2);
-                }
-                console.log("Took from 2");
-                break;
-            case 3:
-                if(numRight3 == 3) {
-                	numRight3 == 3;
-                } else {
-                	numRight3--;
-                	progress(numRight3);
-                }
-                console.log("Took from 3");
-                break;
-            case 4:
-                if(numRight4 == 3) {
-                	numRight4 == 3;
-                } else {
-                	numRight4--;
-                	progress(numRight4);
-                }
-                console.log("Took from 4");
-                break;
-            default:
-                window.alert("Question type could not be chosen");
-        }
-    } else {
-        window.alert("No answer.");
-    }
-}
-
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ARRAYS:													 *
+ * Holds various questions for each data type, and			 *
+ * corresponding answers. Also has various wrong answers.	 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
+//wrong answer arrays, for each type
 var words = ["angry", "awake", "run", "sad", "food", "oak", "java", "python", "magic"];
+var numbers;
 var names = ["Louis Armstrong", "Nelson Mandela", "George Washington", "Barack Obama", "Theodore Roosevelt", "Taylor Swift", "Peter", "Luna", "Harold", "Tiffany"];
 
+//category 1 questions and correct answers
 var qset1word = ["What does the word 'joy' mean?", "What does the word 'apprehensive' mean?"];
 var aset1word = ["happy", "scared"];
 var qset1num = ["What is 9+10?"];
@@ -253,6 +90,7 @@ var aset1num = ["19"];
 var qset1name = ["What is the name of the founder of Microsoft?", "What is the name of the first man to walk on the moon?", "What is the name of the founder of SpaceX?"];
 var aset1name = ["Bill Gates", "Neil Armstrong", "Elon Musk"];
 
+//category 2 questions and correct answers
 var qset2word = ["What does the word 'sleepy' mean?"];
 var aset2word = ["tired"];
 var qset2num = ["What is 7+8?", "What is 5x6?"];
@@ -260,6 +98,7 @@ var aset2num = ["15", "30"];
 var qset2name = ["What is the name of the mentor who helped us come up with ideas?", "What is the name of the person in charge of the Rails workshop?"];
 var aset2name = ["Jinny", "Michael"]
 
+//category 3 questions and correct answers
 var qset3word = ["What does the word 'intelligent' mean?"];
 var aset3word = ["smart"];
 var qset3num = ["What is the percentage of people that major in tech?", "What is the percentage of people that major in history?"];
@@ -267,6 +106,7 @@ var aset3num = ["40", "40"];
 var qset3name = ["Who is the founder of Apple?"];
 var aset3name = ["Steve Jobs"];
 
+//category 4 questions and correct answers
 var qset4word = ["What does the word 'strut' mean?", "What does the word 'hop' mean?"];
 var aset4word = ["walk", "jump"];
 var qset4num = ["What is 9+28?"];
@@ -274,11 +114,119 @@ var aset4num = ["37"]
 var qset4name = ["Who was the third president of the U.S.?", "Who was the 4th president of the U.S.?"];
 var aset4name = ["Thomas Jefferson", "James Madison"]
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * FUNCTIONS:											     *
+ * Define functions, in the order they are used in the main	 *
+ * game(); function. Order is:								 *
+ * - chooseData();											 *
+ * - typeName();											 *
+ * - generate_questions();									 *
+ * - zeroHistory();											 *
+ * - oneHistory();											 *
+ * - twoHistory();											 *
+ * - sticker();												 *
+ * - progress();											 *
+ * - changeButtons();										 *
+ * - drawCanvas();											 *
+ * - showQuestion();										 *
+ * - answered();											 *
+ * - result();												 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+//stores all the player scores in an easy-to-pull function
+function chooseData(player,category){
+	if(player == 1){
+		/* if player 1, and game category is a certain value, return current value for variables:
+		 * player1numRight1
+		 * player1numRight2
+		 * player1numRight3
+		 * player1numRight4
+		 */
+		switch(category){
+			case 1:
+				return player1numRight1;
+				break;
+			case 2:
+				return player1numRight2;
+				break;
+			case 3:
+				return player1numRight3;
+				break;
+			case 4:
+				return player1numRight4;
+				break;
+			default:
+				//if category can't be found,send error message
+				window.alert("Category not found");
+		}
+	} else if (player == 2){
+		/* if player 2, and game category is a certain value, return current value for variables:
+		 * player2numRight1
+		 * player2numRight2
+		 * player2numRight3
+		 * player2numRight4
+		 */
+		switch(category){
+			case 1:
+				return player2numRight1;
+				break;
+			case 2:
+				return player2numRight2;
+				break;
+			case 3:
+				return player2numRight3;
+				break;
+			case 4:
+				return player2numRight4;
+				break;
+			default:
+				//if category can't be found,send error message
+				window.alert("Category not found");
+		}
+	} else {
+		//if player can't be found, send error message
+		window.alert("Player not found");
+	}
+}
+
+//stores all the question category names in a function
+function typeName(type){
+	/* The following questionType values correspond with the following rights:
+	 * 1 = LGBT rights
+	 * 2 = Environmental problems
+	 * 3 = Education
+	 * 4 = Health
+	 */
+	switch(type){
+		case 1:
+			return "LGBT rights";
+			break;
+		case 2:
+			return "Environmental problems";
+			break;
+		case 3:
+			return "Education";
+			break;
+		case 4:
+			return "Health";
+			break;
+		default:
+			//if type can't be found, send error message
+			window.alert("Question type not found");
+	}
+}
+
+//generates questions and a series of 4 answers, stored in questions[] and answers[]
 function generate_questions() {
+	//reset values each time function runs
 	answers.length = 0;
 	i = 0;
+	
+	//choose a random question and answer type
     questionType = Math.floor((Math.random() * 3.49) + 1);
     answerType = Math.floor((Math.random() * 2.49) + 1);
+    
+    //for each question type and answer type, pull one of the above arrays and set to questions[] and correctAnswers[]
     switch (questionType) {
         case 1:
             switch (answerType) {
@@ -295,6 +243,7 @@ function generate_questions() {
                     correctAnswers = aset1name;
                     break;
                 default:
+                	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
             }
             break;
@@ -313,6 +262,7 @@ function generate_questions() {
                     correctAnswers = aset2name;
                     break;
                 default:
+                	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
             }
             break;
@@ -331,6 +281,7 @@ function generate_questions() {
                     correctAnswers = aset3name;
                     break;
                 default:
+                	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
             }
             break;
@@ -349,59 +300,330 @@ function generate_questions() {
                     correctAnswers = aset4name;
                     break;
                 default:
+                	//if answer type cannot be found, send error message
                     window.alert("Error: Answer type could not be chosen");
             }
             break;
         default:
+        	//if question type cannot be found, send error message
             window.alert("Error: Question type could not be chosen.");
     }
-    console.log("Question Type: " + questionType);
+    //console.log("Question Type: " + questionType);
+    
+    //set num to a random value within the array to get a random question
     num = Math.floor(Math.random() * questions.length);
-    console.log("Question: " + questions[num]);
-    console.log("Answer Type: " + answerType);
-    console.log("Correct Answer: " + correctAnswers[num]);
+    //console.log("Question: " + questions[num]);
+    //console.log("Answer Type: " + answerType);
+    //console.log("Correct Answer: " + correctAnswers[num]);
+    
+    //the answers correspond with the question numbers, so answer can be pushed to answer choices array. 0 is always correct
     answers.push(correctAnswers[num]);
-    console.log("Answers array:" + answers.toString());
+    //console.log("Answers array:" + answers.toString());
+    
+    //pushes a random wrong answer from the wrong answer arrays based off of input type. repeats 3 times.
     while (i < 3) {
         switch (answerType) {
             case 1:
                 answers.push(words[Math.floor(Math.random() * words.length)].toString());
-                console.log("Answers array:" + answers.toString());
+                //console.log("Answers array:" + answers.toString());
                 break;
             case 2:
                 numbers = Math.floor(Math.random() * 100);
-                console.log("Answers array:" + answers.toString());
+                //console.log("Answers array:" + answers.toString());
                 answers.push(numbers.toString());
                 break;
             case 3:
                 answers.push(names[Math.floor(Math.random() * names.length)].toString());
-                console.log("Answers array:" + answers.toString());
+                //console.log("Answers array:" + answers.toString());
                 break;
             default:
+            	//if answer type cannot be found, send error message
                 window.alert("Error: Answer type could not be chosen");
         }
         i++;
     }
-    console.log("Wrong Answer: " + answers[2]);
+    //console.log("Wrong Answer: " + answers[2]);
 }
 
+//for each potential score for a category, display the following on the canvas
+
+//0 points for the category
+function zeroHistory() {
+	ctx.fillStyle = "#cccccc";
+	ctx.fillRect(375,125,150,25);
+	ctx.fillRect(530,125,150,25);
+	ctx.fillRect(685,125,150,25);
+}
+
+//1 point for the category
+function oneHistory() {
+	ctx.fillStyle = "#33d6ff";
+	ctx.fillRect(375,125,150,25);
+	ctx.fillStyle = "#cccccc";
+	ctx.fillRect(530,125,150,25);
+	ctx.fillRect(685,125,150,25);
+}
+
+//2 points for the category
+function twoHistory() {
+	ctx.fillStyle = "#33d6ff";
+	ctx.fillRect(375,125,150,25);
+	ctx.fillRect(530,125,150,25);
+	ctx.fillStyle = "#cccccc";
+	ctx.fillRect(685,125,150,25);
+}
+
+//3 points for the category
+function sticker() {
+	ctx.fillStyle = "#33d6ff";
+	ctx.fillRect(375,125,150,25);
+	ctx.fillRect(530,125,150,25);
+	ctx.fillRect(685,125,150,25);
+	//for each question type, display the corresponding sticker
+	switch(questionType) {
+		case 1:
+			ctx.drawImage(pride, 10, 200);
+			break;
+		case 2:
+			ctx.drawImage(env, 10, 200);
+			break;
+		case 3:
+			ctx.drawImage(edu, 10, 200);
+			break;
+		case 4:
+			ctx.drawImage(health, 10, 200);
+			break;
+		default:
+			//if question type cannot be found, send error message
+			window.alert("Question type could not be found");
+	}
+}
+
+//figures out which score to display
+function progress(prog) {
+	switch (prog) {
+		case 0:
+			zeroHistory();
+			break;
+		case 1:
+			oneHistory();
+			break;
+		case 2:
+			twoHistory();
+			break;
+		case 3:
+			sticker();
+			break;
+		default:
+			//if score cannot be found, send error message
+			window.alert("Progress not saved");
+	}
+}
+
+//changes the answer choices on the button
+function changeButtons() {
+	//resets the buttons
+	x = 0;
+	y = 0;
+	z = 0;
+	randomAnswer = 0;
+	
+	//randomly assigns each button an answer, only one is correct
+	randomAnswer = Math.floor(Math.random() * 3.49);
+    a.innerHTML = answers[randomAnswer];
+    x = randomAnswer;
+    while (x == randomAnswer) {
+        randomAnswer = Math.floor(Math.random() * 3.49);
+    }
+    b.innerHTML = answers[randomAnswer];
+    y = randomAnswer;
+    while (x == randomAnswer || y == randomAnswer) {
+        randomAnswer = Math.floor(Math.random() * 3.49);
+    }
+    c.innerHTML = answers[randomAnswer];
+    z = randomAnswer;
+    while (x == randomAnswer || y == randomAnswer || z == randomAnswer) {
+        randomAnswer = Math.floor(Math.random() * 3.49);
+    }
+    d.innerHTML = answers[randomAnswer];
+	//console.log("x = " + x);
+	//console.log("y = " + y);
+	//console.log("z = " + z);
+	//console.log("randomAnswer = " + randomAnswer);
+}
+
+//draws and stylizes a basic canvas, creates playerCategory, and adds to the canvas the current player
+function drawCanvas() {
+	//create playerCategory
+	playerCategory = chooseData(currentPlayer,questionType);
+    
+    //create the canvas
+    canvas = document.getElementById("game");
+    //console.log("Canvas value: " + canvas);
+    ctx = canvas.getContext("2d");
+    
+    //reset the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    //stylize the canvas
+    ctx.font = "30px Lato, sans-serif";
+    ctx.fillStyle = "aliceblue";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+	
+	//add the current player to the canvas
+	ctx.fillText("Player " + currentPlayer + "'s turn", 375, 200);
+	setTimeout(showQuestion, 1000);
+}
+
+//shows the question category, question, and past progress onto the canvas
+function showQuestion() {
+	//finds the name of the question category
+	questionTypeName = typeName(questionType);
+	
+	//stylizes canvas
+	ctx.fillStyle = "black";
+	
+	//adds question category, question, and progress
+	ctx.fillText("The category is: " + questionTypeName, 10, 50);
+	ctx.fillText("Question: " + questions[num], 10, 100);
+	ctx.fillText("Progress for this category: ",10,150);
+	progress(playerCategory);
+	
+	//run changeButtons();
+    changeButtons();
+}
+
+//runs after an answer is picked. shows whether the answer is correct, whether the game is over, and whether the player switches turns.
+//also updates player scores
 function answered(variable) {
+	//finds if player picked correct answer
 	if (variable == 0) {
 		correcto = true;
 	} else {
 		correcto = false;
     }
+    //console.log("Correct?: " + correcto);
+    
+    //runs result();
     result(correcto);
-    console.log("Correct?: " + correcto);
-    if (numRight1 >= 3 && numRight2 >= 3 && numRight3 >= 3 && numRight4 >= 3) {
-		window.alert("You win!");
+    
+    //finds if game is over. will redirect later on
+    if (chooseData(currentPlayer,1) >= 3 && chooseData(currentPlayer,2) >= 3 && chooseData(currentPlayer,3) >= 3 && chooseData(currentPlayer,4) >= 3) {
+		window.alert("Game over!");
 	} else {
 		setTimeout(game, 2000);
 	}
+	
+	//updates databases
+	if(currentPlayer == 1){
+		switch(questionType){
+			case 1:
+				player1numRight1 = playerCategory;
+				break;
+			case 2:
+				player1numRight2 = playerCategory;
+				break;
+			case 3:
+				player1numRight3 = playerCategory;
+				break;
+			case 4:
+				player1numRight4 = playerCategory;
+				break;
+			default:
+				//if question type not found, run error message
+				window.alert("Category not found");
+		}
+	} else if (currentPlayer == 2){
+		switch(questionType){
+			case 1:
+				player2numRight1 = playerCategory;
+				break;
+			case 2:
+				player2numRight2 = playerCategory;
+				break;
+			case 3:
+				player2numRight3 = playerCategory;
+				break;
+			case 4:
+				player2numRight4 = playerCategory;
+				break;
+			default:
+				//if question type not found, run error message
+				window.alert("Category not found");
+		}
+	}
+	
+	//if the player is wrong, switch players
+	if(correcto == false) {
+		if(currentPlayer == 1){
+			currentPlayer = 2;
+		} else if (currentPlayer == 2){
+			currentPlayer = 1;
+		} else {
+			//if player is not found, run error message
+			window.alert("Player not found.");
+		}
+	} else {
+		//console.log("Players didn't switch");
+	}
 }
 
+//shows the result on the canvas, changes player score, updates score to canvas
+function result(right_or_wrong) {
+	//stylizes canvas
+	ctx.fillStyle = "black";
+	
+	//if player is correct
+    if (right_or_wrong == true) {
+    	//display message on canvas
+    	ctx.fillText("You are correct!", 375, 250);
+    	
+    	//updates player score
+        if(playerCategory == 3) {
+            playerCategory == 3;
+        } else {
+            playerCategory++;
+            progress(playerCategory);
+        }
+    } else if (right_or_wrong == false) {
+    	//if player is wrong, display message on canvas
+    	ctx.fillText("You are wrong!", 375, 250);
+    	
+    	//updates player score
+    	if(playerCategory == 3) {
+                	playerCategory == 3;
+                } else if (playerCategory == 0) {
+                	playerCategory == 0;
+                } else {
+                	playerCategory--;
+                	progress(playerCategory);
+        }
+    } else {
+    	//if correctness cannot be found, show error message
+        window.alert("No answer.");
+    }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * MAIN FUNCTION:											 *
+ * Runs all the functions that do not run on each other.	 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
+//main game() function
 function game() {
     generate_questions();
     drawCanvas();
+    /*console.log("1,1:"+player1numRight1);
+    console.log("1,2:"+player1numRight2);
+    console.log("1,3:"+player1numRight3);
+    console.log("1,4:"+player1numRight4);
+    console.log("2,1:"+player2numRight1);
+    console.log("2,2:"+player2numRight2);
+    console.log("2,3:"+player2numRight3);
+    console.log("2,4:"+player2numRight4);
+    console.log("player:"+currentPlayer);*/
 }
+
+//run main function
 game();
