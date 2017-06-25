@@ -147,7 +147,7 @@ function chooseData(category){
 			return numRight1;
 			break;
 		case 2:
-			return pnumRight2;
+			return numRight2;
 			break;
 		case 3:
 			return numRight3;
