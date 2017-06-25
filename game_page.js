@@ -374,15 +374,23 @@ function sticker() {
 	switch(questionType) {
 		case 1:
 			ctx.drawImage(pride, 10, 200);
+			pride.style.height = '100px';
+    		pride.style.width = '100px';
 			break;
 		case 2:
 			ctx.drawImage(env, 10, 200);
+			env.style.height = '100px';
+    		env.style.width = '100px';
 			break;
 		case 3:
 			ctx.drawImage(edu, 10, 200);
+			edu.style.height = '100px';
+    		edu.style.width = '100px';
 			break;
 		case 4:
 			ctx.drawImage(health, 10, 200);
+			health.style.height = '100px';
+    		health.style.width = '100px';
 			break;
 		default:
 			//if question type cannot be found, send error message
